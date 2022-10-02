@@ -8,6 +8,10 @@ class CustomErrorHandler extends Error {
     static alreadyExist(message) {
         return new CustomErrorHandler(409, message);
     }
+
+    static wrongCredentials(message= 'Incorrect email or password') {
+        return new CustomErrorHandler(401, message)
+    }
 }
 
 
