@@ -11,12 +11,12 @@ const auth = async (req, res, next)=> {
 
     //if header present
 
-    const token = authHeader.match(/ey.*/g)[0];
-    console.log(token[0]);
+     const token = authHeader.match(/ey.*/g)[0];
+     console.log(token[0]);
     
     try {
-        const { _id, role } = await JwtService.verify(token);
-        console.log(token[0]);
+        const { _id, role } = JwtService.verify(token);
+       //console.log(token[0]);
         const user = {
             _id,
             role
