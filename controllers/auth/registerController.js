@@ -5,6 +5,7 @@ import bcrypt, { hash } from 'bcrypt';
 import JwtService from '../../services/JwtService';
 import { REFRESH_SECRET } from '../../config';
 
+
 const registerController = {
    async register(req, res, next) {
         //logic here
