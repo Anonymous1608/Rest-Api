@@ -52,7 +52,29 @@ const loginController = {
         catch(err) {
             return next(err);
         }
+    },
+    
+   async logout(req,res,next) {
+        //validation
+        const refreshSchema = Joi.object({
+            refresh_token : Joi.string().required()
+        });
+
+        const { error } = refreshSchema.validate(req.body);
+
+        if(error) {
+            return next(error);
+        }
+    try {
+
+        await RefreshToken.deleteOne({ token : req.body.refresh_token });
     }
+    catch(err) {
+        return next(new Error('something went wrong in database'));
+    }
+
+    res.json({ status: 1 });
+   }
 }
 
 export default loginController;
