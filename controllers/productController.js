@@ -106,6 +106,23 @@ const productController = {
 
 		res.status(201).json(document);
 		});
+    },
+
+    async delete(req, res, next) {
+        const document = await Product.findOneAndRemove({ _id: req.params.id });
+        if(!document) {
+            return next(new Error('Nothing to delete'));
+        }
+
+        // image delete
+        const imagePath = document.image;
+        fs.unlink(`${appRoot}/${imagePath}`, (err) => {
+            if(err) {
+                return next(CustomErrorHandler.serverError());
+            }
+        });
+
+        res.json(document);
     }
 }
 
